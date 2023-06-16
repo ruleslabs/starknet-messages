@@ -2,7 +2,6 @@ use traits::Into;
 use box::BoxTrait;
 
 // locals
-use messages::typed_data::constants;
 use messages::typed_data::common::hash_u256;
 use messages::typed_data::typed_data::Message;
 
