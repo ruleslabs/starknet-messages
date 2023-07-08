@@ -9,4 +9,4 @@ name = "messages"
 
 [dependencies]
 rules_account = { git = "https://github.com/ruleslabs/starknet-rules-account.git" }
-starknet = ">=1.0.0"
+starknet = "2.0.0-rc3"
