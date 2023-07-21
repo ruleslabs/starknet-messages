@@ -10,7 +10,7 @@ use super::utils;
 use super::mocks::signer::Signer;
 use super::mocks::voucher::Voucher;
 use super::mocks::order::{ Order, Item, ERC20_Item, ERC1155_Item };
-use messages::messages::Messages::{ ContractState as MessagesContractState, HelperTrait };
+use messages::messages::Messages::{ ContractState as MessagesContractState, InternalTrait };
 
 // dispatchers
 use rules_account::account::{ AccountABIDispatcher, AccountABIDispatcherTrait };

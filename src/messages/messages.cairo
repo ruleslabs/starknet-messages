@@ -17,12 +17,11 @@ mod Messages {
   }
 
   //
-  // Helpers
+  // Internals
   //
 
   #[generate_trait]
-  #[external(v0)]
-  impl HelperImpl of HelperTrait {
+  impl InternalImpl of InternalTrait {
     fn _is_message_signature_valid(
       self: @ContractState,
       hash: felt252,
@@ -31,15 +30,13 @@ mod Messages {
     ) -> bool {
       // check signature
       let signer_account = AccountABIDispatcher { contract_address: signer };
-      signer_account.is_valid_signature(message: hash, :signature) == account::interface::ERC1271_VALIDATED
+      signer_account.is_valid_signature(message: hash, :signature) == starknet::VALIDATED
     }
 
-    #[internal]
     fn _is_message_consumed(self: @ContractState, hash: felt252) -> bool {
       self._consumed_messages.read(hash)
     }
 
-    #[internal]
     fn _consume_message(ref self: ContractState, hash: felt252) {
       self._consumed_messages.write(hash, true);
     }
