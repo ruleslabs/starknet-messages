@@ -102,7 +102,7 @@ fn setup() -> MessagesContractState {
 }
 
 fn setup_signer(public_key: felt252) -> AccountABIDispatcher {
-  let mut calldata = array![public_key];
+  let calldata = array![public_key];
 
   let signer_address = utils::deploy(Signer::TEST_CLASS_HASH, calldata);
   AccountABIDispatcher { contract_address: signer_address }
