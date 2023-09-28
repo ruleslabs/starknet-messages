@@ -27,20 +27,20 @@ impl TypedDataImpl<T, impl TMessage: Message<T>> of TypedDataTrait<T> {
     let account = from.into();
     let message_hash = self.compute_hash();
 
-    let mut hash = pedersen(0, prefix);
-    hash = pedersen(hash, domain_hash);
-    hash = pedersen(hash, account);
-    hash = pedersen(hash, message_hash);
+    let mut hash = pedersen::pedersen(0, prefix);
+    hash = pedersen::pedersen(hash, domain_hash);
+    hash = pedersen::pedersen(hash, account);
+    hash = pedersen::pedersen(hash, message_hash);
 
-    pedersen(hash, 4)
+    pedersen::pedersen(hash, 4)
   }
 }
 
 fn hash_domain(chain_id: felt252, domain: Domain) -> felt252 {
-  let mut hash = pedersen(0, constants::STARKNET_DOMAIN_TYPE_HASH);
-  hash = pedersen(hash, domain.name);
-  hash = pedersen(hash, chain_id);
-  hash = pedersen(hash, domain.version);
+  let mut hash = pedersen::pedersen(0, constants::STARKNET_DOMAIN_TYPE_HASH);
+  hash = pedersen::pedersen(hash, domain.name);
+  hash = pedersen::pedersen(hash, chain_id);
+  hash = pedersen::pedersen(hash, domain.version);
 
-  pedersen(hash, 4)
+  pedersen::pedersen(hash, 4)
 }
