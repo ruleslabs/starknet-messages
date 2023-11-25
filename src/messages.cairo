@@ -1,2 +1,2 @@
 mod messages;
-use messages::Messages;
+use messages::MessagesComponent;

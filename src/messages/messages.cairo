@@ -1,7 +1,7 @@
 const ERC1271_VALIDATED: felt252 = 0x1626ba7e;
 
-#[starknet::contract]
-mod Messages {
+#[starknet::component]
+mod MessagesComponent {
   use array::SpanTrait;
   use rules_account::account;
 
@@ -23,9 +23,13 @@ mod Messages {
   //
 
   #[generate_trait]
-  impl InternalImpl of InternalTrait {
+  impl InternalImpl<
+    TContractState,
+    +HasComponent<TContractState>,
+    +Drop<TContractState>
+  > of InternalTrait<TContractState> {
     fn _is_message_signature_valid(
-      self: @ContractState,
+      self: @ComponentState<TContractState>,
       hash: felt252,
       signature: Span<felt252>,
       signer: starknet::ContractAddress
@@ -37,11 +41,11 @@ mod Messages {
       (res == starknet::VALIDATED) | (res == super::ERC1271_VALIDATED)
     }
 
-    fn _is_message_consumed(self: @ContractState, hash: felt252) -> bool {
+    fn _is_message_consumed(self: @ComponentState<TContractState>, hash: felt252) -> bool {
       self._consumed_messages.read(hash)
     }
 
-    fn _consume_message(ref self: ContractState, hash: felt252) {
+    fn _consume_message(ref self: ComponentState<TContractState>, hash: felt252) {
       self._consumed_messages.write(hash, true);
     }
   }
