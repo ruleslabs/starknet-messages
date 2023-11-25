@@ -8,5 +8,4 @@ name = "messages"
 # See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
 
 [dependencies]
-rules_account = { git = "https://github.com/ruleslabs/starknet-rules-account.git" }
-starknet = ">=2.1.0-rc0"
+rules_account = { git = "https://github.com/ruleslabs/starknet-rules-account.git", branch = "main" }
